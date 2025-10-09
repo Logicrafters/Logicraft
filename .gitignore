@@ -2,7 +2,7 @@ CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
-Testing
+prototype
 Makefile
 cmake_install.cmake
 install_manifest.txt
@@ -10,6 +10,8 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
+.idea/
+third_party/fetch_content/
 
 # CLion
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
