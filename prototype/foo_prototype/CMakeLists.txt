@@ -20,4 +20,4 @@ target_include_directories(Foo
             "${INCLUDE_DIR}"
 )
 
-register_prototype_library(Foo)
+register_prototype_library(Prototype::Foo)

@@ -10,10 +10,12 @@ target_sources(UnitTest PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/unit_tests.cpp")
 
 target_compile_features(UnitTest PRIVATE cxx_std_20)
 
+get_property(prototype_libraries GLOBAL PROPERTY PROTOTYPE_LIBRARIES)
+
 target_link_libraries(UnitTest
         PRIVATE
             GTest::gtest_main
-            ${PROTOTYPE_LIBRARIES}
+            ${prototype_libraries}
 )
 
 gtest_discover_tests(UnitTest)
