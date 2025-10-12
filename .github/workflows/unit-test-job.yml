@@ -1,0 +1,129 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Linux
+          - os: ubuntu-lastest
+            compiler: gcc
+            build_type: Debug
+
+          - os: ubuntu-lastest
+            compiler: gcc
+            build_type: Release
+
+          - os: ubuntu-lastest
+            compiler: clang
+            build_type: Debug
+
+          - os: ubuntu-lastest
+            compiler: clang
+            build_type: Release
+
+          # Window
+          - os: window-lastest
+            compiler: msvc
+            build_type: Debug
+
+          - os: window-lastest
+            compiler: msvc
+            build_type: Release
+
+          - os: window-lastest
+            compiler: gcc
+            build_type: Debug
+
+          - os: window-lastest
+            compiler: gcc
+            build_type: Release
+
+          # MacOS
+          - os: macos-lastest
+            compiler: clang
+            build_type: Debug
+
+          - os: macos-lastest
+            compiler: clang
+            build_type: Release
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache fetch content dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ github.workspace }}/third_party/fetch_content
+          key: ftc-${{ runner.os }}-${{ matrix.compiler }}-${{ hashFiles('third_party/CMakeLists.txt') }}
+          restore-keys: |
+            ftc-${{ runner.os }}-${{ matrix.compiler }}-
+            ftc-${{ runner.os }}-
+
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ matrix.os }}-${{ matrix.compiler }}-${{ matrix.build_type }}
+
+      - name: Setup GCC
+        if: matrix.compiler == 'gcc' && runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++
+
+      - name: Setup Clang
+        if: matrix.compiler == 'clang' && runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang
+
+      - name: Setup MinGW
+        if: matrix.compiler == 'gcc' && runner.os == 'Window'
+        uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake
+
+      - name: Configure CMake (Linux/macOS)
+        if: runner.os != 'Window'
+        run: |
+          if [ "${{ matrix.compiler }}" == "clang" ]; then
+            export CC=clang
+            export CXX=clang++
+          fi
+            cmake -B build \
+              -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+              -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+              -DBUILD_TESTS=ON
+
+      - name: Configure CMake (Window MSVC)
+        if: runner.os == 'Window' && matrix.compiler == 'msvc'
+        run: |
+          cmake -B build `
+              -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} `
+              -DCMAKE_CXX_COMPILER_LAUNCHER=ccache `
+              -DBUILD_TESTS=ON
+
+      - name: Configure CMake (Window MinGW)
+        if: runner.os == 'Window' && matrix.compiler == 'gcc'
+        shell: msys2 {0}
+        run: |
+          cmake -B build \
+            -G "MinGW Makefiles" \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+            -DBUILD_TESTS=ON
+
+      - name: Build
+        run: cmake --build build --config ${{ matrix.build_type }} -j
+
+      - name: Run tests
+        run: ctest --test-dir build -C ${{ matrix.build_type }} --output-on-failure --verbose
