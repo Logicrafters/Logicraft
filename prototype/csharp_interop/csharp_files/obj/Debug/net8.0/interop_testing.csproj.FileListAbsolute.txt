@@ -1,0 +1,15 @@
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\bin\Debug\net8.0\interop_testing.exe
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\bin\Debug\net8.0\interop_testing.deps.json
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\bin\Debug\net8.0\interop_testing.runtimeconfig.json
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\bin\Debug\net8.0\interop_testing.dll
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\bin\Debug\net8.0\interop_testing.pdb
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\obj\Debug\net8.0\interop_testing.GeneratedMSBuildEditorConfig.editorconfig
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\obj\Debug\net8.0\interop_testing.AssemblyInfoInputs.cache
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\obj\Debug\net8.0\interop_testing.AssemblyInfo.cs
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\obj\Debug\net8.0\interop_testing.csproj.CoreCompileInputs.cache
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\obj\Debug\net8.0\interop_testing.sourcelink.json
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\obj\Debug\net8.0\interop_testing.dll
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\obj\Debug\net8.0\refint\interop_testing.dll
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\obj\Debug\net8.0\interop_testing.pdb
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\obj\Debug\net8.0\interop_testing.genruntimeconfig.cache
+E:\repos\C++\Logicraft\prototype\csharp_interop\csharp_files\obj\Debug\net8.0\ref\interop_testing.dll

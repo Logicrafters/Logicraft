@@ -5,7 +5,7 @@ project(Logicraft)
 include(Utils)
 include(PrototypeUtils)
 
-create_target_directory_variable()
+create_target_directory_variable("${CMAKE_CURRENT_SOURCE_DIR}/src" "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 add_library_with_namespace(Prototype Foo STATIC)
 

@@ -1,0 +1,27 @@
+﻿cmake_minimum_required(VERSION 3.29)
+
+project(Logicraft)
+
+include(Utils)
+include(CSharpUtils)
+include(GenerateExportHeader)
+
+create_target_directory_variable("${CMAKE_CURRENT_SOURCE_DIR}/cpp_files/src" "${CMAKE_CURRENT_SOURCE_DIR}/cpp_files/include")
+
+add_library_with_namespace(Prototype InteropCPP SHARED)
+
+target_include_directories(InteropCPP
+    PUBLIC ${INCLUDE_DIR}
+    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+target_sources(InteropCPP PRIVATE
+    "${SRC_DIR}/math_api.cpp"
+    "${INCLUDE_DIR}/math_api.h"
+)
+
+generate_export_header(InteropCPP)
+
+copy_target_dll(InteropCPP "${CMAKE_CURRENT_SOURCE_DIR}/csharp_files/bin/${CMAKE_BUILD_TYPE}/net8.0")
+
+create_csharp_build_target("${CMAKE_CURRENT_SOURCE_DIR}/csharp_files" interop_testing InteropCPP)
