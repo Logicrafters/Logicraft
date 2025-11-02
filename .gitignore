@@ -11,6 +11,8 @@ _deps
 CMakeUserPresets.json
 .idea/
 third_party/fetch_content/
+bin/
+obj/
 
 # CLion
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
