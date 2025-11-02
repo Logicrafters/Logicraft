@@ -5,7 +5,6 @@
         COMMAND dotnet
             build "${TARGET_NAME}.csproj"
             -c ${CMAKE_BUILD_TYPE}
-        COMMAND echo Salut 2
         WORKING_DIRECTORY ${TARGET_DIRECTORY}
         DEPENDS ${DLL_DEP}
     )
