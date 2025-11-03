@@ -10,28 +10,28 @@ public class InteropTesting
         int result = External.Add(5, 10);
         Console.WriteLine($"5 + 10 = {result}");
 
-        Vector3f firstVector = new (20, 20, 20);
-        Vector3f secondVector = new (20, 20, 20);
+        Vector3 firstVector = new (20, 20, 20);
+        Vector3 secondVector = new (20, 20, 20);
         
-        Console.WriteLine($"firstVector : {firstVector} + secondVector : {secondVector} = {firstVector + secondVector}");
+        Console.WriteLine($"FirstVector : {firstVector} + secondVector : {secondVector} = {firstVector + secondVector}");
         
-        Console.WriteLine($"dot product of the first and second vector : {firstVector.Normalized().DotProduct(secondVector.Normalized())}");
+        Console.WriteLine($"Dot product of the first and second vector : {firstVector.Normalized().DotProduct(secondVector.Normalized())}");
         
-        Console.WriteLine($"length of the first vector : {firstVector.Length()}");
+        Console.WriteLine($"Length of the first vector : {firstVector.Length()}");
         
-        Console.WriteLine($"normalized first vector : {firstVector.Normalized()}");
+        Console.WriteLine($"Normalized first vector : {firstVector.Normalized()}");
         
-        Console.WriteLine($"identity of the first vector : {firstVector.Normalized().ToIdentity()}");
+        Console.WriteLine($"Identity of the first vector : {firstVector.Normalized().ToIdentity()}");
 
-        Vector3f vector = new Vector3f(10f, 20f, 30f);
-        IntPtr pVector = Marshal.AllocHGlobal(Marshal.SizeOf<Vector3f>());
+        Vector3 vector = new Vector3(10f, 20f, 30f);
+        IntPtr pVector = Marshal.AllocHGlobal(Marshal.SizeOf<Vector3>());
         Marshal.StructureToPtr(vector, pVector, false);
 
         float x = Marshal.PtrToStructure<float>(pVector);
         
         Marshal.StructureToPtr(x, pVector + 4, false);
         
-        vector = Marshal.PtrToStructure<Vector3f>(pVector);
+        vector = Marshal.PtrToStructure<Vector3>(pVector);
 
         Console.WriteLine(vector);
         
