@@ -19,20 +19,19 @@ class game_object final
 public:
     game_object() = default;
     explicit game_object(std::string_view _name);
-    game_object(const game_object& other);
+    game_object(const game_object&) = delete;
     game_object(game_object&&) noexcept = default;
     ~game_object();
 
-    game_object& operator=(const game_object& other);
+    game_object& operator=(const game_object&) = delete;
     game_object& operator=(game_object&&) noexcept = default;
 
     void start();
     void update();
 
     component& add_component(void* _gc_handle);
-private:
-    void copy_components(const game_object& other);
 
+private:
     std::string m_name{"game object"};
 
     std::vector<sptr_component_t> m_components;
