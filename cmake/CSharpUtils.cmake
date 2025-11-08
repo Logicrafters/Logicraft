@@ -15,6 +15,6 @@
             -c ${CMAKE_BUILD_TYPE}
             --no-build
         WORKING_DIRECTORY ${TARGET_DIRECTORY}
-        DEPENDS ${TARGET_NAME}
+        DEPENDS ${TARGET_NAME}_build
     )
 endfunction()
