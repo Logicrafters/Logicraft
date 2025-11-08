@@ -7,7 +7,7 @@ public class InteropTesting
 {
     public static void Main(string[] args)
     {
-        int result = External.Add(5, 10);
+        /*int result = External.Add(5, 10);
         Console.WriteLine($"5 + 10 = {result}");
 
         Vector3 firstVector = new (20, 20, 20);
@@ -35,6 +35,19 @@ public class InteropTesting
 
         Console.WriteLine(vector);
         
-        Marshal.FreeHGlobal(pVector);
+        Marshal.FreeHGlobal(pVector);*/
+
+        unsafe
+        {
+            ExternalComponent.SetGlobalComponentCallback(
+                &ExternalComponent.ComponentStart, 
+                &ExternalComponent.ComponentUpdate, 
+                &ExternalComponent.ComponentDestroy);   
+        }
+
+        GameObject gameObject = new GameObject("super game object");
+        gameObject.AddComponents<LogComponent>();
+        
+        ExternalGameObject.UpdateGameObjects();
     }
 }

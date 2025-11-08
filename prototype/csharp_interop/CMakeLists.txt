@@ -18,8 +18,14 @@ target_include_directories(InteropCPP
 target_sources(InteropCPP PRIVATE
     "${SRC_DIR}/math_api.cpp"
     "${SRC_DIR}/math_type.cpp"
+    "${SRC_DIR}/game_object.cpp"
+    "${SRC_DIR}/game_object_holder.cpp"
+    "${SRC_DIR}/component.cpp"
     "${INCLUDE_DIR}/math_api.h"
     "${INCLUDE_DIR}/math_type.h"
+    "${INCLUDE_DIR}/game_object.h"
+    "${INCLUDE_DIR}/game_object_holder.h"
+    "${INCLUDE_DIR}/component.h"
 )
 
 target_compile_features(InteropCPP PRIVATE cxx_std_20)
