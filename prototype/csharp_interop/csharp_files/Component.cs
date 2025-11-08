@@ -29,7 +29,7 @@ internal static partial class ExternalComponent
         component?.Update();
     }
 
-    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
+    [UnmanagedCallersOnly(CallConvs = new []{typeof(CallConvCdecl)})]
     internal static void ComponentDestroy(IntPtr gcHandlePtr)
     {
         GCHandle gcHandle = GCHandle.FromIntPtr(gcHandlePtr);
