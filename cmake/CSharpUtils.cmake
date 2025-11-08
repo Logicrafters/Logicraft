@@ -1,7 +1,7 @@
 ﻿function(create_csharp_build_target TARGET_DIRECTORY TARGET_NAME)
     list(SUBLIST ARGV 2 -1 DLL_DEP)
 
-    add_custom_target(${TARGET_NAME} ALL
+    add_custom_target(${TARGET_NAME}_build ALL
         COMMAND dotnet
             build "${TARGET_NAME}.csproj"
             -c ${CMAKE_BUILD_TYPE}
@@ -9,7 +9,7 @@
         DEPENDS ${DLL_DEP}
     )
 
-    add_custom_target(${TARGET_NAME}_build
+    add_custom_target(${TARGET_NAME}_run
         COMMAND dotnet run
             --project "${TARGET_NAME}.csproj"
             -c ${CMAKE_BUILD_TYPE}

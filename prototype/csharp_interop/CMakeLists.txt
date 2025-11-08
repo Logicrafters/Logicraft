@@ -17,8 +17,12 @@ target_include_directories(InteropCPP
 
 target_sources(InteropCPP PRIVATE
     "${SRC_DIR}/math_api.cpp"
+    "${SRC_DIR}/math_type.cpp"
     "${INCLUDE_DIR}/math_api.h"
+    "${INCLUDE_DIR}/math_type.h"
 )
+
+target_compile_features(InteropCPP PRIVATE cxx_std_20)
 
 generate_export_header(InteropCPP)
 
