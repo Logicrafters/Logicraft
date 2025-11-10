@@ -33,7 +33,7 @@ public sealed class GameObject
         _internalReference = ExternalGameObject.CreateGameObject(name, name.Length);
     }
 
-    public T AddComponents<T>() where T : Component, new()
+    public T AddComponent<T>() where T : Component, new()
     {
         var component = new T();
         var gcHandle = GCHandle.Alloc(component, GCHandleType.Normal);

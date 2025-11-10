@@ -42,11 +42,11 @@ public class InteropTesting
             ExternalComponent.SetGlobalComponentCallback(
                 &ExternalComponent.ComponentStart, 
                 &ExternalComponent.ComponentUpdate, 
-                &ExternalComponent.ComponentDestroy);   
+                &ExternalComponent.ComponentDestroy);
         }
 
         GameObject gameObject = new GameObject("super game object");
-        gameObject.AddComponents<LogComponent>();
+        gameObject.AddComponent<LogComponent>();
         
         ExternalGameObject.UpdateGameObjects();
     }

@@ -34,4 +34,4 @@ generate_export_header(InteropCPP)
 
 copy_target_dll(InteropCPP "${CMAKE_CURRENT_SOURCE_DIR}/csharp_files/bin/${CMAKE_BUILD_TYPE}/net8.0")
 
-create_csharp_build_target("${CMAKE_CURRENT_SOURCE_DIR}/csharp_files" interop_testing InteropCPP)
+create_csharp_build_target("${CMAKE_CURRENT_SOURCE_DIR}/csharp_files" interop_testing TRUE InteropCPP)
