@@ -5,7 +5,7 @@
 #include "foo.h"
 #include <iostream>
 
-void Foo::Bar()
+void foo::bar()
 {
     std::cout << "Hello World!\n";
 }

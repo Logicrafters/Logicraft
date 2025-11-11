@@ -2,6 +2,7 @@
 
 project(Logicraft)
 
+include(Utils)
 include(FetchContent)
 
 set(FETCHCONTENT_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/fetch_content")
@@ -15,20 +16,17 @@ if (BUILD_TEST)
         message(STATUS "GoogleTest not found using find_package.")
         message(STATUS "Using FetchContent to declare it.")
 
-        FetchContent_Declare(
-                googletest
-                GIT_REPOSITORY https://github.com/google/googletest.git
-                GIT_TAG v1.17.0
-                SOURCE_DIR ${FETCHCONTENT_BASE_DIR}/googletest
+        download_package(
+            googletest
+            https://github.com/google/googletest.git
+            v1.17.0
+            TRUE
+            BOOL gtest_force_shared_crt ON ""
+            BOOL gtest_build_tests OFF "Turning off gtest tests building."
+            BOOL gtest_build_samples OFF "Turning off gtest samples building."
+            BOOL gmock_build_tests OFF "Turning off gmock tests building."
         )
-
-        set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-        set(gtest_build_tests OFF CACHE BOOL "Turning off gtest tests building.")
-        set(gtest_build_samples OFF CACHE BOOL "Turning off gtest samples building.")
-        set(gmock_build_tests OFF CACHE BOOL "Turning off gmock tests building.")
-
-        FetchContent_MakeAvailable(googletest)
-    endif ()
+    endif()
 
     enable_testing()
 endif ()

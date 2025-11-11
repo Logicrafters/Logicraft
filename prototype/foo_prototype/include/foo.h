@@ -6,10 +6,10 @@
 #define LOGICRAFT_FOO_H
 
 
-class Foo
+class foo
 {
 public:
-    void Bar();
+    void bar();
 };
 
 

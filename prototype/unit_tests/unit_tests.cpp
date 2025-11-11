@@ -7,8 +7,8 @@
 
 TEST(TestSuiteName, TestName)
 {
-    Foo foo;
-    foo.Bar();
+    foo foo;
+    foo.bar();
 
     EXPECT_EQ(3, 3);
 }
