@@ -5,23 +5,23 @@ namespace interop_testing;
 
 internal static partial class ExternalVector3
 {
-    [LibraryImport(libraryName: "libInteropCPP", EntryPoint = "add_vector")]
+    [LibraryImport(libraryName: "InteropCPP", EntryPoint = "add_vector")]
     [UnmanagedCallConv(CallConvs = new []{ typeof(CallConvCdecl)})]
     internal static partial Vector3 AddVector(in Vector3 first, in Vector3 second);
     
-    [LibraryImport(libraryName: "libInteropCPP", EntryPoint = "vector_dot_product")]
+    [LibraryImport(libraryName: "InteropCPP", EntryPoint = "vector_dot_product")]
     [UnmanagedCallConv(CallConvs = new []{ typeof(CallConvCdecl)})]
     internal static partial float VectorDotProduct(in Vector3 first, in Vector3 second);
     
-    [LibraryImport(libraryName: "libInteropCPP", EntryPoint = "vector_length")]
+    [LibraryImport(libraryName: "InteropCPP", EntryPoint = "vector_length")]
     [UnmanagedCallConv(CallConvs = new []{ typeof(CallConvCdecl)})]
     internal static partial float VectorLength(in Vector3 vector);
     
-    [LibraryImport(libraryName: "libInteropCPP", EntryPoint = "vector_normalized")]
+    [LibraryImport(libraryName: "InteropCPP", EntryPoint = "vector_normalized")]
     [UnmanagedCallConv(CallConvs = new []{ typeof(CallConvCdecl)})]
     internal static partial Vector3 VectorNormalized(in Vector3 vector);
     
-    [LibraryImport(libraryName: "libInteropCPP", EntryPoint = "vector_to_identity")]
+    [LibraryImport(libraryName: "InteropCPP", EntryPoint = "vector_to_identity")]
     [UnmanagedCallConv(CallConvs = new []{ typeof(CallConvCdecl)})]
     internal static partial Quaternion VectorToIdentity(in Vector3 vector);
 }

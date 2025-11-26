@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <PlatformTarget>x64</PlatformTarget>
+        <Nullable>enable</Nullable>
+
+        <SearchedArtefact>EngineCore</SearchedArtefact>
+        <NativeArtefactPath>../../../artefacts/native/$(Configuration)/$(SearchedArtefact)</NativeArtefactPath>
+        <NativeArtefact Condition = "Exists('$(NativeArtefactPath)')">$(NativeArtefactPath)/**</NativeArtefact>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="$(NativeArtefact)" Condition="'$(NativeArtefact)' != ''">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Visible>false</Visible>
+        </None>
+    </ItemGroup>
+    
+    <Target Name="NativeArtefactExist" AfterTargets="Build">
+        <Error Condition = "$(NativeArtefact) == ''" Text = "Enable to find required native artefact. Please build the artefact named $(SearchedArtefact)."/>
+    </Target>
+</Project>

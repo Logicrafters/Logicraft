@@ -6,15 +6,15 @@ namespace interop_testing;
 
 internal static partial class ExternalGameObject
 {
-    [LibraryImport(libraryName: "libInteropCPP", EntryPoint = "create_game_object", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport(libraryName: "InteropCPP", EntryPoint = "create_game_object", StringMarshalling = StringMarshalling.Utf8)]
     [UnmanagedCallConv(CallConvs = new []{typeof(CallConvCdecl)})]
     internal static partial IntPtr CreateGameObject(string name, int nameSize);
     
-    [LibraryImport(libraryName: "libInteropCPP", EntryPoint = "update_game_objects")]
+    [LibraryImport(libraryName: "InteropCPP", EntryPoint = "update_game_objects")]
     [UnmanagedCallConv(CallConvs = new []{typeof(CallConvCdecl)})]
     internal static partial void UpdateGameObjects();
     
-    [LibraryImport(libraryName: "libInteropCPP", EntryPoint = "add_component")]
+    [LibraryImport(libraryName: "InteropCPP", EntryPoint = "add_component")]
     [UnmanagedCallConv(CallConvs = new []{typeof(CallConvCdecl)})]
     internal static partial IntPtr AddComponent(IntPtr internalGameObject, IntPtr gcHandle);
 }

@@ -17,16 +17,17 @@ if (BUILD_TEST)
         message(STATUS "Using FetchContent to declare it.")
 
         download_package(
-            googletest
-            https://github.com/google/googletest.git
-            v1.17.0
-            TRUE
-            BOOL gtest_force_shared_crt ON ""
-            BOOL gtest_build_tests OFF "Turning off gtest tests building."
-            BOOL gtest_build_samples OFF "Turning off gtest samples building."
-            BOOL gmock_build_tests OFF "Turning off gmock tests building."
+                NAME googletest
+                GIT_LINK https://github.com/google/googletest.git
+                GIT_VERSION v1.17.0
+                PACKAGE_OPTIONS
+                BOOL gtest_force_shared_crt ON "None"
+                BOOL gtest_build_tests OFF "Turning off gtest tests building."
+                BOOL gtest_build_samples OFF "Turning off gtest samples building."
+                BOOL gmock_build_tests OFF "Turning off gmock tests building."
+                MAKE_IT_AVAILABLE TRUE
         )
-    endif()
+    endif ()
 
     enable_testing()
 endif ()

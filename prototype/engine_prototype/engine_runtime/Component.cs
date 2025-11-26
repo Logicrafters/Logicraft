@@ -2,11 +2,11 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace interop_testing;
+namespace EngineRuntime;
 
 internal static partial class ExternalComponent
 {
-    [LibraryImport(libraryName: "libInteropCPP", EntryPoint = "set_global_component_callbacks", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport(libraryName: "EngineCore", EntryPoint = "set_global_component_callbacks", StringMarshalling = StringMarshalling.Utf8)]
     [UnmanagedCallConv(CallConvs = new []{typeof(CallConvCdecl)})]
     internal static unsafe partial void SetGlobalComponentCallback(
         delegate* unmanaged[Cdecl]<IntPtr, void> startPtr, 
@@ -17,7 +17,7 @@ internal static partial class ExternalComponent
     internal static void ComponentStart(IntPtr gcHandlePtr)
     {
         GCHandle gcHandle = GCHandle.FromIntPtr(gcHandlePtr);
-        Component component = (Component)gcHandle.Target;
+        Component? component = (Component?)gcHandle.Target;
         component?.Start();
     }
     
@@ -25,7 +25,7 @@ internal static partial class ExternalComponent
     internal static void ComponentUpdate(IntPtr gcHandlePtr)
     {
         GCHandle gcHandle = GCHandle.FromIntPtr(gcHandlePtr);
-        Component component = (Component)gcHandle.Target;
+        Component? component = (Component?)gcHandle.Target;
         component?.Update();
     }
 
@@ -33,7 +33,8 @@ internal static partial class ExternalComponent
     internal static void ComponentDestroy(IntPtr gcHandlePtr)
     {
         GCHandle gcHandle = GCHandle.FromIntPtr(gcHandlePtr);
-        ((Component)gcHandle.Target)?.Destroy();
+        Component? component = ((Component?)gcHandle.Target);
+        component?.Destroy();
         gcHandle.Free();
     }
 }
@@ -41,7 +42,7 @@ internal static partial class ExternalComponent
 public class Component
 {
     internal IntPtr InternalReference;
-
+    
     public virtual void Start() {}
     
     public virtual void Update() {}
