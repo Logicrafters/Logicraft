@@ -8,17 +8,40 @@
 
         <SearchedArtefact>EngineCore</SearchedArtefact>
         <NativeArtefactPath>../../../artefacts/native/$(Configuration)/$(SearchedArtefact)</NativeArtefactPath>
-        <NativeArtefact Condition = "Exists('$(NativeArtefactPath)')">$(NativeArtefactPath)/**</NativeArtefact>
+        <NativeArtefact Condition = "Exists('$(NativeArtefactPath)')">$(NativeArtefactPath)/*.*</NativeArtefact>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="$(NativeArtefact)" Condition="'$(NativeArtefact)' != ''">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <LinkedNativeArtefacts Include = "EngineCore">
             <Visible>false</Visible>
-        </None>
+        </LinkedNativeArtefacts>
     </ItemGroup>
     
-    <Target Name="NativeArtefactExist" AfterTargets="Build">
-        <Error Condition = "$(NativeArtefact) == ''" Text = "Enable to find required native artefact. Please build the artefact named $(SearchedArtefact)."/>
+    <Target Name="LinkedNativeArtefactsExist" BeforeTargets = "Build">
+        <ItemGroup>
+            <LinkedNativeArtefacts Update = "@(LinkedNativeArtefacts)">
+                <Path>../../../artefacts/native/$(Configuration)/%(LinkedNativeArtefacts.Identity)</Path>
+            </LinkedNativeArtefacts>
+        </ItemGroup>
+        
+        <Error 
+            Condition = "!Exists('%(LinkedNativeArtefacts.Path)')"
+            Text = "Enable to find required native artefact. Please build the artefact named %(LinkedNativeArtefacts.Identity)."
+        />
     </Target>
+
+    <Target Name="CopyNativeArtefacts" AfterTargets = "Build">
+        <ItemGroup>
+            <FoundArtefact Include = "%(LinkedNativeArtefacts.Path)/*.*"/>
+        </ItemGroup>
+        
+        <Error Condition = "true" Text = "%(FoundArtefact.Identity)" />
+        
+        <ItemGroup>
+            <None Include = "@(FoundArtefact)">
+                <Visible>false</Visible>
+                <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            </None>
+        </ItemGroup>
+    </Target>  
 </Project>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <EnableDynamicLoading>true</EnableDynamicLoading>
+        <PlatformTarget>x64</PlatformTarget>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="EngineRuntime">
+            <HintPath>../engine_run</HintPath>
+        </Reference>
+<!--        <ProjectReference Include="../engine_runtime/EngineRuntime.csproj" />-->
+    </ItemGroup>
+</Project>
